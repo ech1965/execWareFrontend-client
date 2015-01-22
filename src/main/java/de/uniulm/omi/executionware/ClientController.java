@@ -20,11 +20,9 @@ package de.uniulm.omi.executionware;
 
 import de.uniulm.omi.executionware.entities.internal.Entity;
 import de.uniulm.omi.executionware.entities.internal.Path;
-import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
-import org.glassfish.jersey.filter.LoggingFilter;
 
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.Invocation;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,35 +34,39 @@ import static com.google.common.base.Preconditions.checkState;
  */
 public class ClientController<T extends Entity> {
 
-    private final WebTarget webTarget;
     private final Class<T> type;
+    private final Client client;
+    private final String baseUrl;
 
-    public ClientController(String url, Class<T> clazz) {
+    public ClientController(Client client, String baseUrl, Class<T> clazz) {
         this.type = clazz;
         checkState(type.isAnnotationPresent(Path.class));
-        url = url + "/" + type.getAnnotation(Path.class).value() + "/";
+        this.baseUrl = baseUrl;
+        this.client = client;
+    }
 
-        webTarget = ClientBuilder.newBuilder().register(JacksonJsonProvider.class).register(LoggingFilter.class).build().target(url);
+    protected Invocation.Builder getRequest(String entityLink) {
+        return this.client.target(entityLink).request(MediaType.APPLICATION_JSON);
     }
 
     public T get(long id) {
-        return this.webTarget.path(String.valueOf(id)).request(MediaType.APPLICATION_JSON).get(this.type);
+        return this.getRequest(this.baseUrl + "/" + this.type.getAnnotation(Path.class).value() + "/" + id).get(this.type);
     }
 
     public List<T> getList() {
         return new ArrayList<T>();
     }
 
-    public T put(T t) {
-        return null;
+    public T create(T t) {
+        return this.getRequest(this.baseUrl + "/" + this.type.getAnnotation(Path.class).value()).put(javax.ws.rs.client.Entity.entity(t, MediaType.APPLICATION_JSON_TYPE)).readEntity(type);
     }
 
-    public T post(T t) {
-        return null;
+    public T update(T t) {
+        return this.getRequest(t.getSelfLink()).post(javax.ws.rs.client.Entity.entity(t, MediaType.APPLICATION_JSON_TYPE)).readEntity(type);
     }
 
     public void delete(T t) {
-
+        this.getRequest(t.getSelfLink()).delete();
     }
 
 

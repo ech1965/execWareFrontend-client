@@ -35,6 +35,10 @@ public class Cloud extends NamedEntity {
         super(links, name);
     }
 
+    public Cloud(String name) {
+        super(null, name);
+    }
+
     protected Cloud() {
     }
 }

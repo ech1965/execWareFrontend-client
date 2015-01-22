@@ -18,11 +18,11 @@
 
 package de.uniulm.omi.executionware.entities;
 
-import de.uniulm.omi.executionware.entities.internal.AbstractEntity;
 import de.uniulm.omi.executionware.entities.internal.Link;
 import de.uniulm.omi.executionware.entities.internal.NamedEntity;
 import de.uniulm.omi.executionware.entities.internal.Path;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -31,8 +31,12 @@ import java.util.List;
 @Path("api")
 public class Api extends NamedEntity {
 
-    public Api(List<Link> links, String name) {
+    public Api(@Nullable List<Link> links, String name) {
         super(links, name);
+    }
+
+    public Api(String name) {
+        this(null, name);
     }
 
     protected Api() {

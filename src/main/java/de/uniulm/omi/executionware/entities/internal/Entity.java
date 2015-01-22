@@ -18,9 +18,14 @@
 
 package de.uniulm.omi.executionware.entities.internal;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 /**
  * Created by daniel on 21.01.15.
  */
 public interface Entity {
-    //intentionally left empty
+
+    @JsonIgnore
+    public String getSelfLink();
+
 }

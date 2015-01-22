@@ -18,27 +18,49 @@
 
 package de.uniulm.omi.executionware.entities.internal;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
+
+import javax.annotation.Nullable;
 import java.util.List;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Created by daniel on 21.01.15.
  */
 public abstract class AbstractEntity implements Entity {
 
+    @JsonIgnore
+    @Nullable
     private List<Link> links;
 
+    @JsonIgnore
     public List<Link> getLinks() {
         return links;
     }
 
-    public void setLinks(List<Link> links) {
+    @JsonProperty
+    public void setLinks(@Nullable List<Link> links) {
         this.links = links;
     }
 
-    public AbstractEntity(List<Link> links) {
+    public AbstractEntity(@Nullable List<Link> links) {
         this.links = links;
     }
 
-    protected AbstractEntity() {
+    public AbstractEntity() {
+
+    }
+
+    @Override
+    public String getSelfLink() {
+        checkNotNull(this.links);
+        for (Link link : this.links) {
+            if (link.getRel().equals("self")) {
+                return link.getHref();
+            }
+        }
+        throw new IllegalStateException("self link not present in entity");
     }
 }

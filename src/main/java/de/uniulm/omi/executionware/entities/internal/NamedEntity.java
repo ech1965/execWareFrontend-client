@@ -26,6 +26,7 @@ import java.util.List;
 public class NamedEntity extends AbstractEntity {
 
     private String name;
+
     public String getName() {
         return name;
     }
@@ -37,6 +38,10 @@ public class NamedEntity extends AbstractEntity {
     public NamedEntity(List<Link> links, String name) {
         super(links);
         this.name = name;
+    }
+
+    public NamedEntity(String name) {
+        this(null, name);
     }
 
     protected NamedEntity() {

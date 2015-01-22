@@ -19,24 +19,29 @@
 package de.uniulm.omi.executionware;
 
 import de.uniulm.omi.executionware.entities.internal.Entity;
+import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
+import org.glassfish.jersey.filter.LoggingFilter;
+
+import javax.ws.rs.client.Client;
 
 /**
  * Created by daniel on 21.01.15.
  */
-public class ClientFactory {
+public class ClientBuilder {
 
     private final String url;
 
-    private ClientFactory(String url) {
+    private ClientBuilder(String url) {
         this.url = url;
     }
 
-    public static ClientFactory getNew(String url) {
-        return new ClientFactory(url);
+    public static ClientBuilder getNew(String url) {
+        return new ClientBuilder(url);
     }
 
-    public <T extends Entity> ClientController<T> create(Class<T> clazz) {
-        return new ClientController<T>(this.url, clazz);
+    public <T extends Entity> ClientController<T> build(Class<T> clazz) {
+        final Client client = javax.ws.rs.client.ClientBuilder.newBuilder().register(JacksonJsonProvider.class).register(LoggingFilter.class).build();
+        return new ClientController<T>(client, this.url, clazz);
     }
 
 }

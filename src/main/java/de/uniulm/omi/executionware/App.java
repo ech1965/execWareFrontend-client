@@ -25,7 +25,16 @@ import de.uniulm.omi.executionware.entities.Cloud;
  */
 public class App {
     public static void main(String[] args) {
-        Cloud cloud = ClientFactory.getNew("http://localhost:9000/api").create(Cloud.class).get(1);
+
+        final ClientController<Cloud> build = ClientBuilder.getNew("http://localhost:9000/api").build(Cloud.class);
+
+        Cloud cloud = new Cloud("mycloud-test");
+        build.create(cloud);
+        cloud = build.get(1);
+        //cloud.setName("test1234");
+        //build.update(cloud);
+        //build.delete(cloud);
+
         System.out.println(cloud.getName());
     }
 }

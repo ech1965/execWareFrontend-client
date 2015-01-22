@@ -22,6 +22,7 @@ import de.uniulm.omi.executionware.entities.internal.AbstractEntity;
 import de.uniulm.omi.executionware.entities.internal.Link;
 import de.uniulm.omi.executionware.entities.internal.Path;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -33,10 +34,14 @@ public class ApplicationComponent extends AbstractEntity {
     private Long application;
     private Long component;
 
-    public ApplicationComponent(List<Link> links, Long application, Long component) {
+    public ApplicationComponent(@Nullable List<Link> links, Long application, Long component) {
         super(links);
         this.application = application;
         this.component = component;
+    }
+
+    public ApplicationComponent(Long application, Long component) {
+        this(null, application, component);
     }
 
     protected ApplicationComponent() {
