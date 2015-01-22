@@ -22,6 +22,7 @@ import de.uniulm.omi.executionware.entities.internal.AbstractEntity;
 import de.uniulm.omi.executionware.entities.internal.Link;
 import de.uniulm.omi.executionware.entities.internal.Path;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -34,11 +35,15 @@ public class CloudImage extends AbstractEntity {
     private Long image;
     private String cloudUuid;
 
-    public CloudImage(List<Link> links, Long cloud, Long image, String cloudUuid) {
+    public CloudImage(@Nullable List<Link> links, Long cloud, Long image, String cloudUuid) {
         super(links);
         this.cloud = cloud;
         this.image = image;
         this.cloudUuid = cloudUuid;
+    }
+
+    public CloudImage(Long cloud, Long image, String cloudUuid) {
+        this(null, cloud, image, cloudUuid);
     }
 
     protected CloudImage() {

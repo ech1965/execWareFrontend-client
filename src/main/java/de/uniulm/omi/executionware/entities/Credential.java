@@ -22,6 +22,7 @@ import de.uniulm.omi.executionware.entities.internal.AbstractEntity;
 import de.uniulm.omi.executionware.entities.internal.Link;
 import de.uniulm.omi.executionware.entities.internal.Path;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -33,10 +34,14 @@ public class Credential extends AbstractEntity {
     private String user;
     private String secret;
 
-    public Credential(List<Link> links, String user, String secret) {
+    public Credential(@Nullable List<Link> links, String user, String secret) {
         super(links);
         this.user = user;
         this.secret = secret;
+    }
+
+    public Credential(String user, String secret) {
+        this(null, user, secret);
     }
 
     protected Credential() {

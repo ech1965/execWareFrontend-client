@@ -36,7 +36,7 @@ public class Cloud extends NamedEntity {
     }
 
     public Cloud(String name) {
-        super(null, name);
+        this(null, name);
     }
 
     protected Cloud() {

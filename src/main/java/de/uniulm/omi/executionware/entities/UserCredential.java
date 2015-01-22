@@ -22,6 +22,7 @@ import de.uniulm.omi.executionware.entities.internal.AbstractEntity;
 import de.uniulm.omi.executionware.entities.internal.Link;
 import de.uniulm.omi.executionware.entities.internal.Path;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -34,11 +35,15 @@ public class UserCredential extends AbstractEntity {
     private Long credential;
     private Long frontendUser;
 
-    public UserCredential(List<Link> links, Long cloudApi, Long credential, Long frontendUser) {
+    public UserCredential(@Nullable List<Link> links, Long cloudApi, Long credential, Long frontendUser) {
         super(links);
         this.cloudApi = cloudApi;
         this.credential = credential;
         this.frontendUser = frontendUser;
+    }
+
+    public UserCredential(Long cloudApi, Long credential, Long frontendUser) {
+        this(null, cloudApi, credential, frontendUser);
     }
 
     protected UserCredential() {

@@ -22,6 +22,7 @@ import de.uniulm.omi.executionware.entities.internal.AbstractEntity;
 import de.uniulm.omi.executionware.entities.internal.Link;
 import de.uniulm.omi.executionware.entities.internal.Path;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -33,10 +34,14 @@ public class Instance extends AbstractEntity {
     private Long applicationComponent;
     private Long virtualMachine;
 
-    public Instance(List<Link> links, Long applicationComponent, Long virtualMachine) {
+    public Instance(@Nullable List<Link> links, Long applicationComponent, Long virtualMachine) {
         super(links);
         this.applicationComponent = applicationComponent;
         this.virtualMachine = virtualMachine;
+    }
+
+    public Instance(Long applicationComponent, Long virtualMachine) {
+        this(null, applicationComponent, virtualMachine);
     }
 
     protected Instance() {

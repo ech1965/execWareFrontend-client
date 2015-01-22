@@ -23,6 +23,7 @@ import de.uniulm.omi.executionware.entities.internal.Link;
 import de.uniulm.omi.executionware.entities.internal.NamedEntity;
 import de.uniulm.omi.executionware.entities.internal.Path;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -36,12 +37,16 @@ public class LifecycleComponent extends NamedEntity {
     private String start;
     private String stop;
 
-    public LifecycleComponent(List<Link> links, String name, String download, String install, String start, String stop) {
+    public LifecycleComponent(@Nullable List<Link> links, String name, String download, String install, String start, String stop) {
         super(links, name);
         this.download = download;
         this.install = install;
         this.start = start;
         this.stop = stop;
+    }
+
+    public LifecycleComponent(String name, String download, String install, String start, String stop) {
+        this(null, name, download, install, start, stop);
     }
 
     protected LifecycleComponent() {

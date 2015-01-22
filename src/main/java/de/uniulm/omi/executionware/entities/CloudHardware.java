@@ -22,6 +22,7 @@ import de.uniulm.omi.executionware.entities.internal.AbstractEntity;
 import de.uniulm.omi.executionware.entities.internal.Link;
 import de.uniulm.omi.executionware.entities.internal.Path;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -34,11 +35,15 @@ public class CloudHardware extends AbstractEntity {
     private Long hardware;
     private String cloudUuid;
 
-    public CloudHardware(List<Link> links, Long cloud, Long hardware, String cloudUuid) {
+    public CloudHardware(@Nullable List<Link> links, Long cloud, Long hardware, String cloudUuid) {
         super(links);
         this.cloud = cloud;
         this.hardware = hardware;
         this.cloudUuid = cloudUuid;
+    }
+
+    public CloudHardware(Long cloud, Long hardware, String cloudUuid) {
+        this(null, cloud, hardware, cloudUuid);
     }
 
     protected CloudHardware() {

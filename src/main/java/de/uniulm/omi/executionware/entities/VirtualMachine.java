@@ -23,6 +23,7 @@ import de.uniulm.omi.executionware.entities.internal.Link;
 import de.uniulm.omi.executionware.entities.internal.NamedEntity;
 import de.uniulm.omi.executionware.entities.internal.Path;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -36,12 +37,16 @@ public class VirtualMachine extends NamedEntity {
     private Long cloudHardware;
     private Long cloudLocation;
 
-    public VirtualMachine(List<Link> links, String name, Long cloud, Long cloudImage, Long cloudHardware, Long cloudLocation) {
+    public VirtualMachine(@Nullable List<Link> links, String name, Long cloud, Long cloudImage, Long cloudHardware, Long cloudLocation) {
         super(links, name);
         this.cloud = cloud;
         this.cloudImage = cloudImage;
         this.cloudHardware = cloudHardware;
         this.cloudLocation = cloudLocation;
+    }
+
+    public VirtualMachine(String name, Long cloud, Long cloudImage, Long cloudHardware, Long cloudLocation) {
+        this(null, name, cloud, cloudImage, cloudHardware, cloudLocation);
     }
 
     protected VirtualMachine() {

@@ -22,6 +22,7 @@ import de.uniulm.omi.executionware.entities.internal.AbstractEntity;
 import de.uniulm.omi.executionware.entities.internal.Link;
 import de.uniulm.omi.executionware.entities.internal.Path;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -34,11 +35,15 @@ public class CloudLocation extends AbstractEntity {
     private Long location;
     private String cloudUuid;
 
-    public CloudLocation(List<Link> links, Long cloud, Long location, String cloudUuid) {
+    public CloudLocation(@Nullable List<Link> links, Long cloud, Long location, String cloudUuid) {
         super(links);
         this.cloud = cloud;
         this.location = location;
         this.cloudUuid = cloudUuid;
+    }
+
+    public CloudLocation(Long cloud, Long location, String cloudUuid) {
+        this(null, cloud, location, cloudUuid);
     }
 
     protected CloudLocation() {

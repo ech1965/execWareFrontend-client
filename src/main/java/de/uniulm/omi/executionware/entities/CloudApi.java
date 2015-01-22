@@ -22,6 +22,7 @@ import de.uniulm.omi.executionware.entities.internal.AbstractEntity;
 import de.uniulm.omi.executionware.entities.internal.Link;
 import de.uniulm.omi.executionware.entities.internal.Path;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -34,11 +35,15 @@ public class CloudApi extends AbstractEntity {
     private Long cloud;
     private String endpoint;
 
-    public CloudApi(List<Link> links, Long api, Long cloud, String endpoint) {
+    public CloudApi(@Nullable List<Link> links, Long api, Long cloud, String endpoint) {
         super(links);
         this.api = api;
         this.cloud = cloud;
         this.endpoint = endpoint;
+    }
+
+    public CloudApi(Long api, Long cloud, String endpoint) {
+        this(null, api, cloud, endpoint);
     }
 
     protected CloudApi() {

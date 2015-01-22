@@ -22,6 +22,7 @@ import de.uniulm.omi.executionware.entities.internal.AbstractEntity;
 import de.uniulm.omi.executionware.entities.internal.Link;
 import de.uniulm.omi.executionware.entities.internal.Path;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -36,13 +37,17 @@ public class FrontendUser extends AbstractEntity {
     private String password;
     private String repeat;
 
-    public FrontendUser(List<Link> links, String firstName, String lastName, String mail, String password, String repeat) {
+    public FrontendUser(@Nullable List<Link> links, String firstName, String lastName, String mail, String password, String repeat) {
         super(links);
         this.firstName = firstName;
         this.lastName = lastName;
         this.mail = mail;
         this.password = password;
         this.repeat = repeat;
+    }
+
+    public FrontendUser(String firstName, String lastName, String mail, String password, String repeat) {
+        this(null, firstName, lastName, mail, password, repeat);
     }
 
     protected FrontendUser() {

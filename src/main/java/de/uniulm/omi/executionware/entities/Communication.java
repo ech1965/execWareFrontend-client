@@ -22,6 +22,7 @@ import de.uniulm.omi.executionware.entities.internal.AbstractEntity;
 import de.uniulm.omi.executionware.entities.internal.Link;
 import de.uniulm.omi.executionware.entities.internal.Path;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -33,10 +34,14 @@ public class Communication extends AbstractEntity {
     private Long provider;
     private Long consumer;
 
-    public Communication(List<Link> links, Long provider, Long consumer) {
+    public Communication(@Nullable List<Link> links, Long provider, Long consumer) {
         super(links);
         this.provider = provider;
         this.consumer = consumer;
+    }
+
+    public Communication(Long provider, Long consumer) {
+        this(null, provider, consumer);
     }
 
     protected Communication() {

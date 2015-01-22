@@ -23,6 +23,7 @@ import de.uniulm.omi.executionware.entities.internal.Link;
 import de.uniulm.omi.executionware.entities.internal.NamedEntity;
 import de.uniulm.omi.executionware.entities.internal.Path;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -33,9 +34,13 @@ public class Image extends NamedEntity {
 
     private Long operatingSystem;
 
-    public Image(List<Link> links, String name, Long operatingSystem) {
+    public Image(@Nullable List<Link> links, String name, Long operatingSystem) {
         super(links, name);
         this.operatingSystem = operatingSystem;
+    }
+
+    public Image(String name, Long operatingSystem) {
+        this(null, name, operatingSystem);
     }
 
     protected Image() {

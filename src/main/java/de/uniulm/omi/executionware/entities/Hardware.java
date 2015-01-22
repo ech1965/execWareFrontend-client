@@ -22,6 +22,7 @@ import de.uniulm.omi.executionware.entities.internal.AbstractEntity;
 import de.uniulm.omi.executionware.entities.internal.Link;
 import de.uniulm.omi.executionware.entities.internal.Path;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -34,11 +35,15 @@ public class Hardware extends AbstractEntity {
     private Long mbOfRam;
     private Long localDiskSpace;
 
-    public Hardware(List<Link> links, Integer numberOfCpu, Long mbOfRam, Long localDiskSpace) {
+    public Hardware(@Nullable List<Link> links, Integer numberOfCpu, Long mbOfRam, Long localDiskSpace) {
         super(links);
         this.numberOfCpu = numberOfCpu;
         this.mbOfRam = mbOfRam;
         this.localDiskSpace = localDiskSpace;
+    }
+
+    public Hardware(Integer numberOfCpu, Long mbOfRam, Long localDiskSpace) {
+        this(null, numberOfCpu, mbOfRam, localDiskSpace);
     }
 
     protected Hardware() {
