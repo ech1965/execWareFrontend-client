@@ -20,21 +20,51 @@ package de.uniulm.omi.executionware.entities;
 
 import de.uniulm.omi.executionware.entities.internal.AbstractEntity;
 import de.uniulm.omi.executionware.entities.internal.Link;
-import de.uniulm.omi.executionware.entities.internal.NamedEntity;
 import de.uniulm.omi.executionware.entities.internal.Path;
 
 import java.util.List;
 
 /**
- * Created by daniel on 21.01.15.
+ * Created by frank on 21.01.15.
  */
-@Path("cloud")
-public class Cloud extends NamedEntity {
+@Path("hardware")
+public class Hardware extends AbstractEntity {
 
-    public Cloud(List<Link> links, String name) {
-        super(links, name);
+    private Integer numberOfCpu;
+    private Long mbOfRam;
+    private Long localDiskSpace;
+
+    public Hardware(List<Link> links, Integer numberOfCpu, Long mbOfRam, Long localDiskSpace) {
+        super(links);
+        this.numberOfCpu = numberOfCpu;
+        this.mbOfRam = mbOfRam;
+        this.localDiskSpace = localDiskSpace;
     }
 
-    protected Cloud() {
+    protected Hardware() {
+    }
+
+    public Integer getNumberOfCpu() {
+        return numberOfCpu;
+    }
+
+    public void setNumberOfCpu(Integer numberOfCpu) {
+        this.numberOfCpu = numberOfCpu;
+    }
+
+    public Long getMbOfRam() {
+        return mbOfRam;
+    }
+
+    public void setMbOfRam(Long mbOfRam) {
+        this.mbOfRam = mbOfRam;
+    }
+
+    public Long getLocalDiskSpace() {
+        return localDiskSpace;
+    }
+
+    public void setLocalDiskSpace(Long localDiskSpace) {
+        this.localDiskSpace = localDiskSpace;
     }
 }

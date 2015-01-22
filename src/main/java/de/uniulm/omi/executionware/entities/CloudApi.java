@@ -20,21 +20,51 @@ package de.uniulm.omi.executionware.entities;
 
 import de.uniulm.omi.executionware.entities.internal.AbstractEntity;
 import de.uniulm.omi.executionware.entities.internal.Link;
-import de.uniulm.omi.executionware.entities.internal.NamedEntity;
 import de.uniulm.omi.executionware.entities.internal.Path;
 
 import java.util.List;
 
 /**
- * Created by daniel on 21.01.15.
+ * Created by frank on 21.01.15.
  */
-@Path("cloud")
-public class Cloud extends NamedEntity {
+@Path("cloudApi")
+public class CloudApi extends AbstractEntity {
 
-    public Cloud(List<Link> links, String name) {
-        super(links, name);
+    private Long api;
+    private Long cloud;
+    private String endpoint;
+
+    public CloudApi(List<Link> links, Long api, Long cloud, String endpoint) {
+        super(links);
+        this.api = api;
+        this.cloud = cloud;
+        this.endpoint = endpoint;
     }
 
-    protected Cloud() {
+    protected CloudApi() {
+    }
+
+    public Long getApi() {
+        return api;
+    }
+
+    public void setApi(Long api) {
+        this.api = api;
+    }
+
+    public Long getCloud() {
+        return cloud;
+    }
+
+    public void setCloud(Long cloud) {
+        this.cloud = cloud;
+    }
+
+    public String getEndpoint() {
+        return endpoint;
+    }
+
+    public void setEndpoint(String endpoint) {
+        this.endpoint = endpoint;
     }
 }

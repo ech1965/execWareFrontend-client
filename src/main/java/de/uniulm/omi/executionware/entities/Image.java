@@ -26,15 +26,26 @@ import de.uniulm.omi.executionware.entities.internal.Path;
 import java.util.List;
 
 /**
- * Created by daniel on 21.01.15.
+ * Created by frank on 21.01.15.
  */
-@Path("cloud")
-public class Cloud extends NamedEntity {
+@Path("image")
+public class Image extends NamedEntity {
 
-    public Cloud(List<Link> links, String name) {
+    private Long operatingSystem;
+
+    public Image(List<Link> links, String name, Long operatingSystem) {
         super(links, name);
+        this.operatingSystem = operatingSystem;
     }
 
-    protected Cloud() {
+    protected Image() {
+    }
+
+    public Long getOperatingSystem() {
+        return operatingSystem;
+    }
+
+    public void setOperatingSystem(Long operatingSystem) {
+        this.operatingSystem = operatingSystem;
     }
 }

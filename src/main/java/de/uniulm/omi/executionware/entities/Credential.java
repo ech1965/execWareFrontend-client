@@ -20,21 +20,41 @@ package de.uniulm.omi.executionware.entities;
 
 import de.uniulm.omi.executionware.entities.internal.AbstractEntity;
 import de.uniulm.omi.executionware.entities.internal.Link;
-import de.uniulm.omi.executionware.entities.internal.NamedEntity;
 import de.uniulm.omi.executionware.entities.internal.Path;
 
 import java.util.List;
 
 /**
- * Created by daniel on 21.01.15.
+ * Created by frank on 21.01.15.
  */
-@Path("cloud")
-public class Cloud extends NamedEntity {
+@Path("credential")
+public class Credential extends AbstractEntity {
 
-    public Cloud(List<Link> links, String name) {
-        super(links, name);
+    private String user;
+    private String secret;
+
+    public Credential(List<Link> links, String user, String secret) {
+        super(links);
+        this.user = user;
+        this.secret = secret;
     }
 
-    protected Cloud() {
+    protected Credential() {
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getSecret() {
+        return secret;
+    }
+
+    public void setSecret(String secret) {
+        this.secret = secret;
     }
 }

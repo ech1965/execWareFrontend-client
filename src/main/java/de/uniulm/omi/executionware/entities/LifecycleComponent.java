@@ -26,15 +26,56 @@ import de.uniulm.omi.executionware.entities.internal.Path;
 import java.util.List;
 
 /**
- * Created by daniel on 21.01.15.
+ * Created by frank on 21.01.15.
  */
-@Path("cloud")
-public class Cloud extends NamedEntity {
+@Path("lifecycleComponent")
+public class LifecycleComponent extends NamedEntity {
 
-    public Cloud(List<Link> links, String name) {
+    private String download;
+    private String install;
+    private String start;
+    private String stop;
+
+    public LifecycleComponent(List<Link> links, String name, String download, String install, String start, String stop) {
         super(links, name);
+        this.download = download;
+        this.install = install;
+        this.start = start;
+        this.stop = stop;
     }
 
-    protected Cloud() {
+    protected LifecycleComponent() {
+    }
+
+    public String getDownload() {
+        return download;
+    }
+
+    public void setDownload(String download) {
+        this.download = download;
+    }
+
+    public String getInstall() {
+        return install;
+    }
+
+    public void setInstall(String install) {
+        this.install = install;
+    }
+
+    public String getStart() {
+        return start;
+    }
+
+    public void setStart(String start) {
+        this.start = start;
+    }
+
+    public String getStop() {
+        return stop;
+    }
+
+    public void setStop(String stop) {
+        this.stop = stop;
     }
 }

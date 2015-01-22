@@ -20,21 +20,51 @@ package de.uniulm.omi.executionware.entities;
 
 import de.uniulm.omi.executionware.entities.internal.AbstractEntity;
 import de.uniulm.omi.executionware.entities.internal.Link;
-import de.uniulm.omi.executionware.entities.internal.NamedEntity;
 import de.uniulm.omi.executionware.entities.internal.Path;
 
 import java.util.List;
 
 /**
- * Created by daniel on 21.01.15.
+ * Created by frank on 21.01.15.
  */
-@Path("cloud")
-public class Cloud extends NamedEntity {
+@Path("userCredential")
+public class UserCredential extends AbstractEntity {
 
-    public Cloud(List<Link> links, String name) {
-        super(links, name);
+    private Long cloudApi;
+    private Long credential;
+    private Long frontendUser;
+
+    public UserCredential(List<Link> links, Long cloudApi, Long credential, Long frontendUser) {
+        super(links);
+        this.cloudApi = cloudApi;
+        this.credential = credential;
+        this.frontendUser = frontendUser;
     }
 
-    protected Cloud() {
+    protected UserCredential() {
+    }
+
+    public Long getCloudApi() {
+        return cloudApi;
+    }
+
+    public void setCloudApi(Long cloudApi) {
+        this.cloudApi = cloudApi;
+    }
+
+    public Long getCredential() {
+        return credential;
+    }
+
+    public void setCredential(Long credential) {
+        this.credential = credential;
+    }
+
+    public Long getFrontendUser() {
+        return frontendUser;
+    }
+
+    public void setFrontendUser(Long frontendUser) {
+        this.frontendUser = frontendUser;
     }
 }

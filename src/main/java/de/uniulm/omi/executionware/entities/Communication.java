@@ -20,21 +20,41 @@ package de.uniulm.omi.executionware.entities;
 
 import de.uniulm.omi.executionware.entities.internal.AbstractEntity;
 import de.uniulm.omi.executionware.entities.internal.Link;
-import de.uniulm.omi.executionware.entities.internal.NamedEntity;
 import de.uniulm.omi.executionware.entities.internal.Path;
 
 import java.util.List;
 
 /**
- * Created by daniel on 21.01.15.
+ * Created by frank on 21.01.15.
  */
-@Path("cloud")
-public class Cloud extends NamedEntity {
+@Path("communication")
+public class Communication extends AbstractEntity {
 
-    public Cloud(List<Link> links, String name) {
-        super(links, name);
+    private Long provider;
+    private Long consumer;
+
+    public Communication(List<Link> links, Long provider, Long consumer) {
+        super(links);
+        this.provider = provider;
+        this.consumer = consumer;
     }
 
-    protected Cloud() {
+    protected Communication() {
+    }
+
+    public Long getProvider() {
+        return provider;
+    }
+
+    public void setProvider(Long provider) {
+        this.provider = provider;
+    }
+
+    public Long getConsumer() {
+        return consumer;
+    }
+
+    public void setConsumer(Long consumer) {
+        this.consumer = consumer;
     }
 }

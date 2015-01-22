@@ -26,15 +26,15 @@ import de.uniulm.omi.executionware.entities.internal.Path;
 import java.util.List;
 
 /**
- * Created by daniel on 21.01.15.
+ * Created by frank on 21.01.15.
  */
-@Path("cloud")
-public class Cloud extends NamedEntity {
+@Path("api")
+public class Api extends NamedEntity {
 
-    public Cloud(List<Link> links, String name) {
+    public Api(List<Link> links, String name) {
         super(links, name);
     }
 
-    protected Cloud() {
+    protected Api() {
     }
 }

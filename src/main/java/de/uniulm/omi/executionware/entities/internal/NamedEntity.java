@@ -16,25 +16,29 @@
  * under the License.
  */
 
-package de.uniulm.omi.executionware.entities;
-
-import de.uniulm.omi.executionware.entities.internal.AbstractEntity;
-import de.uniulm.omi.executionware.entities.internal.Link;
-import de.uniulm.omi.executionware.entities.internal.NamedEntity;
-import de.uniulm.omi.executionware.entities.internal.Path;
+package de.uniulm.omi.executionware.entities.internal;
 
 import java.util.List;
 
 /**
- * Created by daniel on 21.01.15.
+ * Created by frank on 21.01.15.
  */
-@Path("cloud")
-public class Cloud extends NamedEntity {
+public class NamedEntity extends AbstractEntity {
 
-    public Cloud(List<Link> links, String name) {
-        super(links, name);
+    private String name;
+    public String getName() {
+        return name;
     }
 
-    protected Cloud() {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public NamedEntity(List<Link> links, String name) {
+        super(links);
+        this.name = name;
+    }
+
+    protected NamedEntity() {
     }
 }

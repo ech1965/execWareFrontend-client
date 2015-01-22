@@ -20,21 +20,51 @@ package de.uniulm.omi.executionware.entities;
 
 import de.uniulm.omi.executionware.entities.internal.AbstractEntity;
 import de.uniulm.omi.executionware.entities.internal.Link;
-import de.uniulm.omi.executionware.entities.internal.NamedEntity;
 import de.uniulm.omi.executionware.entities.internal.Path;
 
 import java.util.List;
 
 /**
- * Created by daniel on 21.01.15.
+ * Created by frank on 21.01.15.
  */
-@Path("cloud")
-public class Cloud extends NamedEntity {
+@Path("cloudHardware")
+public class CloudHardware extends AbstractEntity {
 
-    public Cloud(List<Link> links, String name) {
-        super(links, name);
+    private Long cloud;
+    private Long hardware;
+    private String cloudUuid;
+
+    public CloudHardware(List<Link> links, Long cloud, Long hardware, String cloudUuid) {
+        super(links);
+        this.cloud = cloud;
+        this.hardware = hardware;
+        this.cloudUuid = cloudUuid;
     }
 
-    protected Cloud() {
+    protected CloudHardware() {
+    }
+
+    public String getCloudUuid() {
+        return cloudUuid;
+    }
+
+    public void setCloudUuid(String cloudUuid) {
+        this.cloudUuid = cloudUuid;
+    }
+
+    public Long getHardware() {
+        return hardware;
+    }
+
+    public void setHardware(Long hardware) {
+        this.hardware = hardware;
+    }
+
+    public Long getCloud() {
+        return cloud;
+    }
+
+    public void setCloud(Long cloud) {
+        this.cloud = cloud;
     }
 }
