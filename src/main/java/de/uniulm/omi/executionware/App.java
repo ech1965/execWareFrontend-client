@@ -26,15 +26,29 @@ import de.uniulm.omi.executionware.entities.Cloud;
 public class App {
     public static void main(String[] args) {
 
-        final ClientController<Cloud> build = ClientBuilder.getNew("http://localhost:9000/api").build(Cloud.class);
+        //An example
 
-        Cloud cloud = new Cloud("mycloud-test");
-        build.create(cloud);
-        cloud = build.get(1);
-        //cloud.setName("test1234");
-        //build.update(cloud);
-        //build.delete(cloud);
+        //get the controller for the cloud entity
+        final ClientController<Cloud> controller =
+                ClientBuilder.getNew()
+                        // the base url
+                        .url("http://localhost:9000/api")
+                                // the login credentials
+                        .credentials("john.doe@example.com", "admin")
+                                // the entity to get the controller for.
+                        .build(Cloud.class);
 
-        System.out.println(cloud.getName());
+        //fetch the cloud with id = 1
+        Cloud cloud = controller.get(1);
+
+        //create a new Cloud
+        controller.create(new Cloud("MyCloud"));
+
+        //update a cloud
+        cloud.setName("MyNewName");
+        controller.update(cloud);
+
+        //delete a cloud
+        controller.delete(cloud);
     }
 }

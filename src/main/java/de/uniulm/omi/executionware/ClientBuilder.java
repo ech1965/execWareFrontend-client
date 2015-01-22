@@ -18,6 +18,8 @@
 
 package de.uniulm.omi.executionware;
 
+import de.uniulm.omi.executionware.entities.internal.AuthenticationFilter;
+import de.uniulm.omi.executionware.entities.internal.Credential;
 import de.uniulm.omi.executionware.entities.internal.Entity;
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 import org.glassfish.jersey.filter.LoggingFilter;
@@ -29,19 +31,29 @@ import javax.ws.rs.client.Client;
  */
 public class ClientBuilder {
 
-    private final String url;
+    private String url;
+    private Credential credentials;
 
-    private ClientBuilder(String url) {
-        this.url = url;
+    private ClientBuilder() {
     }
 
-    public static ClientBuilder getNew(String url) {
-        return new ClientBuilder(url);
+    public static ClientBuilder getNew() {
+        return new ClientBuilder();
+    }
+
+    public ClientBuilder url(String url) {
+        this.url = url;
+        return this;
+    }
+
+    public ClientBuilder credentials(String email, String password) {
+        this.credentials = new Credential(email, password);
+        return this;
     }
 
     public <T extends Entity> ClientController<T> build(Class<T> clazz) {
-        final Client client = javax.ws.rs.client.ClientBuilder.newBuilder().register(JacksonJsonProvider.class).register(LoggingFilter.class).build();
-        return new ClientController<T>(client, this.url, clazz);
+        final Client client = javax.ws.rs.client.ClientBuilder.newBuilder().register(JacksonJsonProvider.class).register(LoggingFilter.class).register(new AuthenticationFilter(this.credentials, this.url)).build();
+        return new ClientController<>(client, this.url, clazz);
     }
 
 }

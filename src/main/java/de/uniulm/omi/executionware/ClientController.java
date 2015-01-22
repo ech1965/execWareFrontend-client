@@ -38,7 +38,7 @@ public class ClientController<T extends Entity> {
     private final Client client;
     private final String baseUrl;
 
-    public ClientController(Client client, String baseUrl, Class<T> clazz) {
+    ClientController(Client client, String baseUrl, Class<T> clazz) {
         this.type = clazz;
         checkState(type.isAnnotationPresent(Path.class));
         this.baseUrl = baseUrl;
