@@ -23,11 +23,11 @@ import de.uniulm.omi.executionware.entities.internal.Path;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Invocation;
+import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.base.Preconditions.*;
 
 /**
  * Created by daniel on 21.01.15.
@@ -39,8 +39,13 @@ public class ClientController<T extends Entity> {
     private final String baseUrl;
 
     ClientController(Client client, String baseUrl, Class<T> clazz) {
+        checkNotNull(client);
+        checkNotNull(baseUrl);
+        checkArgument(!baseUrl.isEmpty());
+        checkNotNull(clazz);
+        checkState(clazz.isAnnotationPresent(Path.class));
         this.type = clazz;
-        checkState(type.isAnnotationPresent(Path.class));
+
         this.baseUrl = baseUrl;
         this.client = client;
     }
@@ -54,7 +59,8 @@ public class ClientController<T extends Entity> {
     }
 
     public List<T> getList() {
-        return new ArrayList<T>();
+        return this.getRequest(this.baseUrl + "/" + this.type.getAnnotation(Path.class).value()).get(new GenericType<List<T>>() {
+        });
     }
 
     public T create(T t) {

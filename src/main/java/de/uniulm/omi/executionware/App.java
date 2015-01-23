@@ -20,6 +20,8 @@ package de.uniulm.omi.executionware;
 
 import de.uniulm.omi.executionware.entities.Cloud;
 
+import java.util.List;
+
 /**
  * Hello world!
  */
@@ -37,6 +39,9 @@ public class App {
                         .credentials("john.doe@example.com", "admin")
                                 // the entity to get the controller for.
                         .build(Cloud.class);
+
+        //fetch all clouds
+        List<Cloud> clouds = controller.getList();
 
         //fetch the cloud with id = 1
         Cloud cloud = controller.get(1);
