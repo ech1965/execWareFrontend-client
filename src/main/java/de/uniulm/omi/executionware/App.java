@@ -21,11 +21,15 @@ package de.uniulm.omi.executionware;
 import de.uniulm.omi.executionware.entities.Cloud;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * Hello world!
  */
 public class App {
+
+    public static Random random = new Random();
+
     public static void main(String[] args) {
 
         //An example
@@ -43,14 +47,14 @@ public class App {
         //fetch all clouds
         List<Cloud> clouds = controller.getList();
 
-        //fetch the cloud with id = 1
-        Cloud cloud = controller.get(1);
+        //fetch the first cloud from the list
+        Cloud cloud = clouds.get(0);
 
         //create a new Cloud
-        controller.create(new Cloud("MyCloud"));
+        controller.create(new Cloud("MyCloud-"+random.nextInt(100)));
 
         //update a cloud
-        cloud.setName("MyNewName");
+        cloud.setName("MyNewName-"+random.nextInt(100));
         controller.update(cloud);
 
         //delete a cloud

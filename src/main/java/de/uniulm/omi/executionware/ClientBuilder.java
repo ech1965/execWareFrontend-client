@@ -18,10 +18,10 @@
 
 package de.uniulm.omi.executionware;
 
+import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import de.uniulm.omi.executionware.entities.internal.AuthenticationFilter;
 import de.uniulm.omi.executionware.entities.internal.Credential;
 import de.uniulm.omi.executionware.entities.internal.Entity;
-import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 import org.glassfish.jersey.filter.LoggingFilter;
 
 import javax.ws.rs.client.Client;
