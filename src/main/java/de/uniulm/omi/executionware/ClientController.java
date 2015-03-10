@@ -25,6 +25,8 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.*;
@@ -59,7 +61,20 @@ public class ClientController<T extends Entity> {
     }
 
     public List<T> getList() {
-        return this.getRequest(this.baseUrl + "/" + this.type.getAnnotation(Path.class).value()).get(new GenericType<List<T>>() {
+        ParameterizedType parameterizedGenericType = new ParameterizedType() {
+            public Type[] getActualTypeArguments() {
+                return new Type[]{type};
+            }
+
+            public Type getRawType() {
+                return List.class;
+            }
+
+            public Type getOwnerType() {
+                return List.class;
+            }
+        };
+        return this.getRequest(this.baseUrl + "/" + this.type.getAnnotation(Path.class).value()).get(new GenericType<List<T>>(parameterizedGenericType) {
         });
     }
 
