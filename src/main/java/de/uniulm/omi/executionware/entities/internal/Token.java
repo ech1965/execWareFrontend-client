@@ -18,7 +18,8 @@
 
 package de.uniulm.omi.executionware.entities.internal;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Created by daniel on 22.01.15.
