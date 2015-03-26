@@ -19,7 +19,9 @@
 package de.uniulm.omi.executionware;
 
 import de.uniulm.omi.executionware.entities.Cloud;
+import de.uniulm.omi.executionware.entities.PaasageModel;
 
+import java.util.Base64;
 import java.util.List;
 import java.util.Random;
 
@@ -33,7 +35,7 @@ public class App {
     public static void main(String[] args) {
 
         //An example
-
+        exampleModel();
         //get the controller for the cloud entity
         final ClientController<Cloud> controller =
                 ClientBuilder.getNew()
@@ -44,14 +46,14 @@ public class App {
                                 // the entity to get the controller for.
                         .build(Cloud.class);
 
+
+        //create a new Cloud
+        controller.create(new Cloud("MyCloud-"+random.nextInt(100)));
         //fetch all clouds
         List<Cloud> clouds = controller.getList();
 
         //fetch the first cloud from the list
         Cloud cloud = clouds.get(0);
-
-        //create a new Cloud
-        controller.create(new Cloud("MyCloud-"+random.nextInt(100)));
 
         //update a cloud
         cloud.setName("MyNewName-"+random.nextInt(100));
@@ -59,5 +61,38 @@ public class App {
 
         //delete a cloud
         controller.delete(cloud);
+    }
+
+    private static void exampleModel() {
+        //An example
+
+        //get the controller for the cloud entity
+        final ClientController<PaasageModel> controller =
+                ClientBuilder.getNew()
+                        // the base url
+                        .url("http://localhost:9000/api")
+                                // the login credentials
+                        .credentials("john.doe@example.com", "admin")
+                                // the entity to get the controller for.
+                        .build(PaasageModel.class);
+
+        //fetch all clouds
+        List<PaasageModel> models = controller.getList();
+
+
+        PaasageModel model = new PaasageModel("NAME_1"+random.nextInt(100), "CREATE" ,"CREATED", "empty", "UNCHANGED");
+
+        model = controller.create(model);
+
+        //update a cloud
+        model.setAction(PaasageModel.Action.UPLOAD_XMI.toString());
+        String modelContents = "BIDON";
+
+        model.encodeXmiModel(modelContents);
+        controller.update(model);
+
+        //delete a cloud
+        controller.delete(model);
+
     }
 }
