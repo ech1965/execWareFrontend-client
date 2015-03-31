@@ -35,7 +35,7 @@ public class App {
     public static void main(String[] args) {
 
         //An example
-        exampleModel();
+        //exampleModel();
         //get the controller for the cloud entity
         final ClientController<Cloud> controller =
                 ClientBuilder.getNew()
